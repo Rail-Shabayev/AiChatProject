@@ -1,6 +1,7 @@
 package org.rail.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,8 +16,15 @@ import java.util.UUID;
 public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JsonIgnore
     private UUID uuid;
-    private String entry;
+    private String model;
+    private String prompt;
+    @Nullable
+    private boolean raw;
+    @Nullable
+    private boolean stream;
+
     @OneToOne
     @JsonIgnore
     @JoinColumn(name = "response_id")
